@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Corsend Downloader</string>
+    <string name="app_version">v1 ALPHA</string>
+
+    <string name="collect_info">Collecting info...</string>
+    
+    <string name="youtube">Corsend Youtube</string>
+    <string name="youtube_music">Corsend Music</string>
+
+    <string name="install_button">Install Corsend</string>
+    <string name="install">Install</string>
+
+    <string name="installed">Installed</string>
+    <string name="not_installed">Not Installed</string>
+</resources>
