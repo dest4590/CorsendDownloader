@@ -68,4 +68,31 @@
         app:layout_constraintTop_toBottomOf="@+id/textHeader"
         app:layout_constraintVertical_bias="0.8" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="202dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/credits"
+        android:textColor="@color/material_dynamic_neutral30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/serverStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="86dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="11dp"
+        android:alpha="0"
+        android:text="@string/serverOnline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

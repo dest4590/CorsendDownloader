@@ -2,7 +2,7 @@
     <string name="app_name">Corsend Downloader</string>
     <string name="app_version">v1 ALPHA</string>
 
-    <string name="collect_info">Collecting info...</string>
+    <string name="collect_info">Collecting info…</string>
     
     <string name="youtube">Corsend Youtube</string>
     <string name="youtube_music">Corsend Music</string>
@@ -12,4 +12,16 @@
 
     <string name="installed">Installed</string>
     <string name="not_installed">Not Installed</string>
+
+    <string name="credits">CorsendDownloader by dest4590</string>
+    
+    <string name="serverOnline">Server online</string>
+    <string name="serverOffline">Server offline..</string>
+
+    <string name="placeholder">Placeholder</string>
+
+    <string name="settings">Settings</string>
+
+    <string name="developer">dest4590 / Purpl3</string>
+    <string name="underDeveloper">Creator of the Corsend, CorsendDownloader</string>
 </resources>

@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:fillAfter="true"
     android:interpolator="@android:anim/linear_interpolator"
     android:duration="500">
 
-<!--    <translate-->
-<!--        android:fromXDelta="-80dp"-->
-<!--        android:toXDelta="0dp">-->
-<!--    </translate>-->
+    <translate
+        android:fromYDelta="0px"
+        android:toXDelta="-10px">
+    </translate>
 
     <alpha
         android:fromAlpha="0"

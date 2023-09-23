@@ -1,11 +1,12 @@
-package org.corelabs
+package org.corelabs.downloader
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,10 +24,21 @@ class MainActivity : AppCompatActivity() {
                 Utils.animateCharacterByCharacter(findViewById(R.id.collectInfoText), "Collecting info...", 50L)
 
                 // Collect data
-                var info = Utils.collectInfo(this.applicationContext)
+                val info = Utils.collectInfo(this.applicationContext)
 
+                // Check server status
+                val serverStatusView = findViewById<TextView>(R.id.serverStatus)
+                Utils.animateOpacity(serverStatusView, 1000L)
+
+                if (info[2]) {
+                    serverStatusView.text = getString(R.string.serverOnline)
+                } else {
+                    serverStatusView.text = getString(R.string.serverOffline)
+                }
+
+                // Start net intent
                 Handler(Looper.getMainLooper()).postDelayed({
-                    var intent = Intent(this, LoadedActivity::class.java)
+                    val intent = Intent(this, LoadedActivity::class.java)
                     intent.putExtra("data", info.joinToString(separator = ":" ))
                     startActivity(intent)
                     finish()

@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "org.corelabs",
+  "applicationId": "org.corelabs.downloader",
   "variantName": "release",
   "elements": [
     {

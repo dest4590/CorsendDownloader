@@ -8,9 +8,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/app_preview"
         android:layout_width="0dp"
-        android:layout_height="800dp"
-        android:layout_marginTop="300dp"
-        android:background="@drawable/rounded_frame"
+        android:layout_height="804dp"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/app_preview_round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tablayout">
@@ -78,11 +78,26 @@
             app:layout_constraintTop_toBottomOf="@+id/install_button"
             app:layout_constraintVertical_bias="1.0" />
 
+        <TextView
+            android:id="@+id/app_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/roboto_mono"
+            android:text="description here"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_logo"
+            tools:ignore="HardcodedText" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,5 +119,28 @@
             tools:layout_editor_absoluteX="274dp"
             tools:layout_editor_absoluteY="0dp" />
     </com.google.android.material.tabs.TabLayout>
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/readexpro_regular"
+        android:text="@string/placeholder"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tablayout" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/settings"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tablayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

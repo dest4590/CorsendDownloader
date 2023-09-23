@@ -1,12 +1,19 @@
-package org.corelabs
+package org.corelabs.downloader
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
 import android.util.Log
 import android.widget.TextView
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 class Utils {
@@ -38,13 +45,37 @@ class Utils {
 
 
         @Suppress("DEPRECATION")
-        fun isPackageInstalled(packageName: String, context: Context): Boolean {
+        private fun isPackageInstalled(packageName: String, context: Context): Boolean {
             return try {
                 context.packageManager.getApplicationInfo(packageName, 0)
                 true
             } catch (e: PackageManager.NameNotFoundException) {
                 false
             }
+        }
+
+        fun apiRequest(path: String): JSONObject {
+            val url = URL("http://corsend.vidomnia.xyz:9999/$path")
+            val response = StringBuilder()
+            val connection = url.openConnection() as HttpURLConnection
+            try {
+                connection.requestMethod = "GET"
+                connection.connectTimeout = 5000
+                val reader = BufferedReader(InputStreamReader(connection.inputStream))
+
+                var line: String?
+
+                while (reader.readLine().also { line = it } != null) {
+                    response.append(line)
+                }
+            } catch (e: Exception) {
+                Log.e("CorsendDownloader", e.stackTraceToString())
+                return JSONObject("{'server': 'error'}")
+
+            } finally {
+                connection.disconnect()
+            }
+            return JSONObject(response.toString())
         }
 
 
@@ -56,13 +87,18 @@ class Utils {
                 Log.d("CorsendDownloader", "Corsend Youtube installed!")
             }
 
-            if (isPackageInstalled("org.corelabs.corsend", context)) {
+            if (isPackageInstalled("org.corelabs.corsend.music", context)) {
                 Log.d("CorsendDownloader", "Corsend Youtube Music installed!")
                 youtubeMusicInstalled = true
             }
 
-            return arrayOf(youtubeInstalled, youtubeMusicInstalled)
+            // Fix internet
+            StrictMode.setThreadPolicy(ThreadPolicy.Builder().permitAll().build())
 
+            val ping = apiRequest("ping")
+            val online = ping["server"] == "pong"
+
+            return arrayOf(youtubeInstalled, youtubeMusicInstalled, online)
         }
     }
 }

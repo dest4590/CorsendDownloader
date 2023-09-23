@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "org.corelabs"
+    namespace = "org.corelabs.downloader"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "org.corelabs"
+        applicationId = "org.corelabs.downloader"
         minSdk = 26
         targetSdk = 33
         versionCode = 1
