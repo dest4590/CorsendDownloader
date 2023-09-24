@@ -1,9 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.CorsendDownloader" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/material_dynamic_neutral40</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+
     </style>
 
     <style name="Theme.CorsendDownloader" parent="Base.Theme.CorsendDownloader" />
+
+    <style name="Switch">
+        <item name="colorControlActivated">@color/material_dynamic_neutral30</item>
+    </style>
 </resources>

@@ -8,13 +8,15 @@ import android.content.pm.PackageManager
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.TextView
+import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
-
 
 class Utils {
     companion object {
@@ -41,6 +43,14 @@ class Utils {
             animator.duration = durationMillis
 
             animator.start()
+        }
+
+        fun Slide(obj: View, durationMillis: Long, offset: Float) {
+            obj.animate()
+                .translationY(offset)
+                .setDuration(1500)
+                .setInterpolator(LinearOutSlowInInterpolator())
+                .start()
         }
 
 

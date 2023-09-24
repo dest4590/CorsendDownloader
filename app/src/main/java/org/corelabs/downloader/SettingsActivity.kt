@@ -1,12 +1,10 @@
 package org.corelabs.downloader
 
 import android.annotation.SuppressLint
-import android.media.MediaPlayer.OnPreparedListener
 import android.os.Bundle
 import android.widget.FrameLayout
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
-
 
 class SettingsActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")

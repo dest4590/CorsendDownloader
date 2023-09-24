@@ -54,7 +54,7 @@
             android:layout_marginTop="39dp"
             android:layout_marginEnd="23dp"
             android:layout_marginBottom="734dp"
-            android:fontFamily="@font/alata"
+            android:fontFamily="@font/readexpro_regular"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -92,6 +92,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/app_logo"
             tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/app_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="71dp"
+            android:alpha="0"
+            android:text="@string/placeholder"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/app_logo"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -136,8 +148,9 @@
         android:id="@+id/settingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="23dp"
         android:layout_marginEnd="20dp"
+        android:alpha="0"
         android:text="@string/settings"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"

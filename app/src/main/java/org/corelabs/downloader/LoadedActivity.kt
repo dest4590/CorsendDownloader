@@ -1,6 +1,5 @@
 package org.corelabs.downloader
 
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
@@ -18,7 +17,6 @@ import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import android.os.StrictMode.VmPolicy
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -45,7 +43,12 @@ class LoadedActivity : AppCompatActivity() {
         val installedApps = intent.getStringExtra("data")?.split(':')
 
         val youtube = installedApps?.get(0).toBoolean()
+        val youtubeInfo = apiRequest("app/youtube")
+
         val youtubeMusic = installedApps?.get(0).toBoolean()
+        val youtubeMusicInfo = apiRequest("app/youtubeMusic")
+
+        processInstalled(youtube, youtubeMusic)
 
         val tabLayout = findViewById<TabLayout>(R.id.tablayout)
 
@@ -59,23 +62,19 @@ class LoadedActivity : AppCompatActivity() {
         val info = findViewById<TextView>(R.id.info)
         info.alpha = 0f
 
+        val appVersion = findViewById<TextView>(R.id.app_version)
+        appVersion.text = "v" + youtubeInfo["version"].toString()
+
         Handler(Looper.getMainLooper()).postDelayed({
-            val animation = ObjectAnimator.ofFloat(appPreview, "translationY", -400f)
-            animation.duration = 2000
-            animation.interpolator = LinearOutSlowInInterpolator()
-            animation.start()
+            Utils.Slide(appPreview, 2000,-400f)
         }, 100)
 
         Handler(Looper.getMainLooper()).postDelayed({
             val appLogo = findViewById<ImageView>(R.id.app_logo)
 
             appLogo.visibility = View.VISIBLE
-            appLogo.startAnimation(
-                AnimationUtils.loadAnimation(
-                    applicationContext,
-                    R.anim.from_left
-                )
-            )
+            Utils.animateOpacity(appLogo, 500)
+
         }, 1300)
 
         val appPreviewText = findViewById<TextView>(R.id.app_preview_name)
@@ -86,16 +85,20 @@ class LoadedActivity : AppCompatActivity() {
 
         val appDescription = findViewById<TextView>(R.id.app_description)
 
-        Utils.animateCharacterByCharacter(appDescription, apiRequest("app/youtube")["description"].toString(), 40)
+        Utils.animateCharacterByCharacter(appDescription, youtubeInfo["description"].toString(), 40)
 
         // Animate app description
-        appDescription.animate()
-            .translationY(50f)
-            .setDuration(1500)
-            .setInterpolator(LinearOutSlowInInterpolator())
-            .start()
+        Utils.Slide(appDescription, 1500, 50f)
 
         Handler(Looper.getMainLooper()).postDelayed({
+            // Animate application version
+            Utils.animateOpacity(appVersion, 1000)
+
+            // Animate settings button
+            Utils.animateOpacity(settingsButton, 500)
+
+
+            // Animate device info
             Utils.animateOpacity(info, 200)
 
             // Info about phone
@@ -113,10 +116,8 @@ class LoadedActivity : AppCompatActivity() {
             val deviceCodeName = Build.DEVICE
 
 
-            info.text = """Android: $androidVersion (SDK $androidSdkVersion)
-Device: $deviceManufacturer $deviceBrand ($deviceCodeName)
-
-"""
+            info.text = """Android $androidVersion (SDK $androidSdkVersion)
+$deviceManufacturer $deviceBrand ($deviceCodeName)"""
         }, 1300 + 600)
 
         tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
@@ -126,13 +127,13 @@ Device: $deviceManufacturer $deviceBrand ($deviceCodeName)
 
                     Utils.animateCharacterByCharacter(appPreviewText, getString(R.string.youtube), 35)
                     appImage.setImageResource(R.drawable.mmt)
-                    Utils.animateCharacterByCharacter(appDescription, apiRequest("app/youtube")["description"].toString(), 40)
+                    Utils.animateCharacterByCharacter(appDescription, youtubeInfo["description"].toString(), 40)
                 } else {
                     processInstalled(youtube, youtubeMusic)
 
                     Utils.animateCharacterByCharacter(appPreviewText, getString(R.string.youtube_music), 35)
                     appImage.setImageResource(R.drawable.mmt_music)
-                    Utils.animateCharacterByCharacter(appDescription, apiRequest("app/youtubeMusic")["description"].toString(), 40)
+                    Utils.animateCharacterByCharacter(appDescription, youtubeMusicInfo["description"].toString(), 40)
                 }
             }
 
@@ -225,11 +226,12 @@ Device: $deviceManufacturer $deviceBrand ($deviceCodeName)
         }
 
         if (youtubeMusic) {
-
             changeInstalledText(true)
         }
         else {
             changeInstalledText(false)
         }
+
+
     }
 }
